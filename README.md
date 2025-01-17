@@ -39,6 +39,12 @@
 
    - Question: Quelle est la différence entre un contrôleur et une route ?
    - Réponse: Une route définit les points d'entrée de l'application (URLs), tandis qu'un contrôleur gère la logique métier associée à ces points d'entrée.
-
    - Question : Pourquoi séparer la logique métier des routes ?
    - Réponse : Pour une meilleure organisation, une réutilisation du code et une maintenance simplifiée.
+
+7. courseRoute.js
+
+   - Question: Pourquoi séparer les routes dans différents fichiers ?
+   - Réponse : Pour améliorer la lisibilité, faciliter la maintenance, et permettre une meilleure organisation du code en divisant les responsabilités.
+   - Question : Comment organiser les routes de manière cohérente ?
+   - Réponse: Grouper les routes par ressource (ex. utilisateurs, cours) et utiliser des conventions REST pour les noms d’actions.

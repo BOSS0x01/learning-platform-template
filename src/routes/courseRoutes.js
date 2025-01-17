@@ -1,7 +1,7 @@
 // Question: Pourquoi séparer les routes dans différents fichiers ?
-// Réponse : 
+// Réponse : Pour améliorer la lisibilité, faciliter la maintenance, et permettre une meilleure organisation du code en divisant les responsabilités.
 // Question : Comment organiser les routes de manière cohérente ?
-// Réponse: 
+// Réponse: Grouper les routes par ressource (ex. utilisateurs, cours) et utiliser des conventions REST pour les noms d’actions.
 
 const express = require('express');
 const router = express.Router();
