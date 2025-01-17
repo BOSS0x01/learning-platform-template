@@ -69,6 +69,11 @@ async function closeConnections() {
     }
 }
 
+async function connect() {
+  await connectMongo();
+  await connectRedis();
+}
+
 (async () => {
   connectMongo();
   connectRedis();
