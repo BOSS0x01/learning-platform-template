@@ -13,9 +13,10 @@ let mongoClient, redisClient, db;
 
 
 async function connectMongo() {
+  config.validateEnv();
     try {
-        const mongoUri = process.env.MONGODB_URI;
-        const dbName = process.env.MONGODB_DB_NAME;
+        const mongoUri = config.mongodb.uri;
+        const dbName = config.mongodb.dbName;
         mongoClient = new MongoClient(mongoUri);
 
         await mongoClient.connect();
@@ -37,16 +38,11 @@ async function connectMongo() {
 /**
  * Connexion à Redis
  */
-
 async function connectRedis() {
-try {
+  config.validateEnv();
+    try {
         const client = createClient({
-            username: process.env.REDIS_USERNAME, // e.g., 'default'
-            password: process.env.REDIS_PASSWORD, // e.g., 'i7xK5cWG9EmORxZzoP7PX8xRx5LKhDVL'
-            socket: {
-                host: process.env.REDIS_HOST,      // e.g., 'redis-10486.c99.us-east-1-4.ec2.redns.redis-cloud.com'
-                port: parseInt(process.env.REDIS_PORT, 10), // e.g., 10486
-            }
+            url: config.redis.uri // Directly using the Redis URI
         });
 
         client.on('error', err => console.error('Redis Client Error', err));
@@ -55,13 +51,13 @@ try {
         console.log('Connected to Redis!');
         redisClient = client;
 
-
         return client;
     } catch (err) {
         console.error('Failed to connect to Redis:', err);
         throw err;
     }
 }
+
 
 async function closeConnections() {
     if (mongoClient) {
