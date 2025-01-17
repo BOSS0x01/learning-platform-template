@@ -41,17 +41,16 @@ async function connectMongo() {
 async function connectRedis() {
   config.validateEnv();
     try {
-        const client = createClient({
+       redisClient = createClient({
             url: config.redis.uri // Directly using the Redis URI
         });
 
-        client.on('error', err => console.error('Redis Client Error', err));
+        redisClient.on('error', err => console.error('Redis Client Error', err));
 
-        await client.connect();
+        await redisClient.connect();
         console.log('Connected to Redis!');
-        redisClient = client;
 
-        return client;
+        return redisClient;
     } catch (err) {
         console.error('Failed to connect to Redis:', err);
         throw err;
@@ -70,6 +69,10 @@ async function closeConnections() {
     }
 }
 
+(async () => {
+  connectMongo();
+  connectRedis();
+})();
 
 // Export des fonctions et clients
 module.exports = {
